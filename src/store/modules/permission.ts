@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash-es'
 import remainingRouter from '@/router/modules/remaining'
 import { flatMultiLevelRoutes, generateRoute } from '@/utils/routerHelper'
 import { CACHE_KEY, useCache } from '@/hooks/web/useCache'
+import {mockRouterMap} from "@/store/modules/mock";
 
 const { wsCache } = useCache()
 
@@ -39,8 +40,9 @@ export const usePermissionStore = defineStore('permission', {
           res = wsCache.get(CACHE_KEY.ROLE_ROUTERS) as AppCustomRouteRecordRaw[]
         }
         const routerMap: AppRouteRecordRaw[] = generateRoute(res)
+        console.log('从后端拿到的路由', routerMap)
         // 动态路由，404一定要放到最后面
-        this.addRouters = routerMap.concat([
+        this.addRouters = mockRouterMap.concat([
           {
             path: '/:path(.*)*',
             redirect: '/404',
@@ -52,7 +54,7 @@ export const usePermissionStore = defineStore('permission', {
           }
         ])
         // 渲染菜单的所有路由
-        this.routers = cloneDeep(remainingRouter).concat(routerMap)
+        this.routers = cloneDeep(remainingRouter).concat(mockRouterMap)
         resolve()
       })
     },

@@ -1,14 +1,14 @@
 <script lang="tsx">
-import { PropType } from 'vue'
-import { ElMenu, ElScrollbar } from 'element-plus'
-import { useAppStore } from '@/store/modules/app'
-import { usePermissionStore } from '@/store/modules/permission'
-import { useRenderMenuItem } from './components/useRenderMenuItem'
-import { isUrl } from '@/utils/is'
-import { useDesign } from '@/hooks/web/useDesign'
-import { LayoutType } from '@/types/layout'
+import {PropType} from 'vue'
+import {ElMenu, ElScrollbar} from 'element-plus'
+import {useAppStore} from '@/store/modules/app'
+import {usePermissionStore} from '@/store/modules/permission'
+import {useRenderMenuItem} from './components/useRenderMenuItem'
+import {isUrl} from '@/utils/is'
+import {useDesign} from '@/hooks/web/useDesign'
+import {LayoutType} from '@/types/layout'
 
-const { getPrefixCls } = useDesign()
+const {getPrefixCls} = useDesign()
 
 const prefixCls = getPrefixCls('menu')
 
@@ -26,7 +26,7 @@ export default defineComponent({
 
     const layout = computed(() => appStore.getLayout)
 
-    const { push, currentRoute } = useRouter()
+    const {push, currentRoute} = useRouter()
 
     const permissionStore = usePermissionStore()
 
@@ -41,8 +41,10 @@ export default defineComponent({
       }
     })
 
-    const routers = computed(() =>
-      unref(layout) === 'cutMenu' ? permissionStore.getMenuTabRouters : permissionStore.getRouters
+    const routers = computed(() => {
+        console.log('layout ===', unref(layout))
+        return unref(layout) === 'cutMenu' ? permissionStore.getMenuTabRouters : permissionStore.getRouters
+      }
     )
 
     const collapse = computed(() => appStore.getCollapse)
@@ -50,7 +52,7 @@ export default defineComponent({
     const uniqueOpened = computed(() => appStore.getUniqueOpened)
 
     const activeMenu = computed(() => {
-      const { meta, path } = unref(currentRoute)
+      const {meta, path} = unref(currentRoute)
       // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {
         return meta.activeMenu as string
@@ -94,7 +96,7 @@ export default defineComponent({
         >
           {{
             default: () => {
-              const { renderMenuItem } = useRenderMenuItem(unref(menuMode))
+              const {renderMenuItem} = useRenderMenuItem(unref(menuMode))
               return renderMenuItem(unref(routers))
             }
           }}

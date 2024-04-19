@@ -1,4 +1,5 @@
 import request from '@/config/axios'
+import {simpleList} from "@/api/system/dict/mock";
 
 export type DictDataVO = {
   id: number | undefined
@@ -15,7 +16,8 @@ export type DictDataVO = {
 
 // 查询字典数据（精简)列表
 export const getSimpleDictDataList = () => {
-  return request.get({ url: '/system/dict-data/simple-list' })
+  // return request.get({ url: '/system/dict-data/simple-list' })
+  return Promise.resolve(simpleList)
 }
 
 // 查询字典数据列表

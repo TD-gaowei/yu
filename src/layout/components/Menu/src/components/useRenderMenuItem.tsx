@@ -10,6 +10,8 @@ export const useRenderMenuItem = () =>
   // allRouters: AppRouteRecordRaw[] = [],
   {
     const renderMenuItem = (routers: AppRouteRecordRaw[], parentPath = '/') => {
+      // console.log('从路由中拿到功能菜单', routers)
+
       return routers
         .filter((v) => !v.meta?.hidden)
         .map((v) => {
