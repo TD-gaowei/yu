@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, unref, watch } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { useDesign } from '@/hooks/web/useDesign'
+import {computed, onMounted, ref, unref, watch} from 'vue'
+import {useAppStore} from '@/store/modules/app'
+import {useDesign} from '@/hooks/web/useDesign'
 
-defineOptions({ name: 'Logo' })
+defineOptions({name: 'Logo'})
 
-const { getPrefixCls } = useDesign()
+const {getPrefixCls} = useDesign()
 
 const prefixCls = getPrefixCls('logo')
 
@@ -66,6 +66,7 @@ watch(
       ]"
       to="/"
     >
+      <!-- TODO: 提供 logo 更换 -->
       <img
         class="h-[calc(var(--logo-height)-10px)] w-[calc(var(--logo-height)-10px)]"
         src="@/assets/imgs/logo.png"
